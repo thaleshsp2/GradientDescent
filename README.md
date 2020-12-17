@@ -9,10 +9,13 @@ Onde o ótimo é x∗=[1,0]T.
 Requisitos da implementação:
 
     Inicialmente, plotar as curvas de nível da função objetivo;
+![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/fob.png?raw=true)
 
     Plotar o valor de f(x¯) ao longo das iterações;
+![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/iterations.png?raw=true)
 
     Ao final, marcar o ponto x¯∗ no gráfico inicial;
+![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/min.png?raw=true)
 
     Ter uma função que retorne o valor de f(x¯) e de ∇f(x¯) para um dado x¯;
 
@@ -34,11 +37,6 @@ Dicas:
 
     αk=d1−x1d1−2x2d2d21+2d22.
 
-
-- $\alpha_k = \frac{d_1 - x_1d_1 - 2x_2d_2}{d_1^2+2d_2^2}$.
-![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/fob.png?raw=true)
-![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/iterations.png?raw=true)
-![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/min.png?raw=true)
 
 
 
