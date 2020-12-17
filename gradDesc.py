@@ -22,7 +22,7 @@ def gradientDescent(x0, fob):
     e = 0.01
     res = []
     for i in range(max_it):
-        gk = fob(x0[0], x0[1])[0]
+        gk = fob(x0[0], x0[1])[1]
         d = dk(x0)
         alph = alpha(d, x0)
         x_old = float(fob(x0[0], x0[1])[0])
@@ -32,7 +32,7 @@ def gradientDescent(x0, fob):
         if np.abs(x_new - x_old) < e:
             print("Precision achieved")
             res.append([x_new, x0])
-            return np.array(res)
+            return np.array(res, dtype="object")
     print("Max of iterations achieved")
     res.append([x_new, x0])
     return np.array(res)
