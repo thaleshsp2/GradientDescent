@@ -1,55 +1,71 @@
-# This a implementation of Gradient Descent algorith applied to minimize FOBs.
-
 import numpy as np
 import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+
+def fob(x1, x2):
+    fob = np.power(x1 - 1, 2) + 2 * np.power(x2, 2)
+    grad = np.array([2*(x1-1), 4*x2])
+    return fob, grad
+
+x1 = np.arange(-10, 10, 0.1)
+x2 = -x1
+x1, x2 = np.meshgrid(x1, x2)
+z = fob(x1, x2)
+fig, ax = plt.subplots(1)
+ax2 = ax.contour(x1, x2, z[0], cmap=plt.get_cmap('rainbow'))
+ax.clabel(ax2, inline=1, fontsize=10)
+plt.show()
 
 
-# FOB
-def f_x(x):
-    return np.power(x + 2, 2) - 16 * np.exp(-np.power((x - 2), 2))
+def fob(x1, x2):
+    fob = np.power(x1 - 1, 2) + 2 * np.power(x2, 2)
+    grad = np.array([2 * (x1 - 1), 4 * x2])
+    return fob, grad
 
 
-def main_plot():
-    x = np.arange(-8, 8, 0.001) # Interval of x [-8,8]
-    y = map(lambda u: f_x(u), x)
-    plt.plot(x, list(y))
-
-#main_plot()
-#plt.show()
+def dk(x0):
+    return -fob(x0[0], x0[1])[1] / np.abs(fob(x0[0], x0[1])[0])
 
 
-def grad_f_x(x):
-    return (2 * x - 4) - 16 * (-2 * x + 4) * np.exp(-np.power(x - 2, 2))
+def alpha(dk, x0):
+    alphax = (dk[0] - x0[0] * dk[0] - 2 * x0[1] * dk[1]) / (np.power(dk[0], 2) + 2 * np.power(dk[1], 2))
+    return alphax
 
 
-def gradient_descent(x0, func, grad): #x0 = ponto inicial
-    # precisão da solução
-    precision = 0.001
-    # Learning rate: muito pequeno pode demorar muito a convergir; muito grande pode fazer um 'overshoot' ao mínimo
-    learning_rate = 0.0001
-    # Temos de dar um limite ao número de iteracções
-    max_iter = 10000
-    x_new = x0
+def gradientDescent(x0, fob):
+    max_it = 100
+    e = 0.01
     res = []
-    for i in range(max_iter):
-        x_old = x_new
-        # Vamos usar B = 1
-        x_new = x_old - learning_rate * grad(x_old)
-        f_x_new = func(x_new)
-        f_x_old = func(x_old)
-        res.append([x_new, f_x_new])
-        print(f_x_new - f_x_old)
-        if(abs (f_x_new - f_x_old) < precision):
-            print("Precisão %f alcançada:" % (f_x_new - f_x_old))
+    for i in range(max_it):
+        gk = fob(x0[0], x0[1])[0]
+        d = dk(x0)
+        alph = alpha(d, x0)
+        x_old = float(fob(x0[0], x0[1])[0])
+        res.append([x_old, x0])
+        x0 = x0 + alph * d
+        x_new = float(fob(x0[0], x0[1])[0])
+        if np.abs(x_new - x_old) < e:
+            print("Precision achieved")
+            res.append([x_new, x0])
             return np.array(res)
-    print("Iteracção máxima alcançada")
+    print("Max of iterations achieved")
+    res.append([x_new, x0])
     return np.array(res)
 
-# Vamos então tentar encontrar o mínimo da função começando com um valor inicial de x0 = -8
+
+x0 = np.array([10, 10])
+res = gradientDescent(x0, fob)
+
+fig, ax = plt.subplots(figsize=(12, 8))
+_ = ax.plot(range(len(res)), res[:, 0, ], 'ro')
+plt.ylabel('FOB')
+plt.xlabel('Iterations')
+print(res)
 
 
-x0 = 8
-res = gradient_descent(x0, f_x, grad_f_x)
-plt.plot(res[:, 0], res[:, 1], '+')
-main_plot()
+fig, ax = plt.subplots(1)
+ax2 = ax.contour(x1, x2, z[0], cmap=plt.get_cmap('rainbow'))
+plt.plot(res[-1][1][0], res[-1][1][1], 'ro')
+print(res[-1][1][0], res[-1][1][1])
+ax.clabel(ax2, inline=1, fontsize=10)
 plt.show()
