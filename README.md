@@ -40,6 +40,8 @@ Dicas:
 
 - $\alpha_k = \frac{d_1 - x_1d_1 - 2x_2d_2}{d_1^2+2d_2^2}$.
 ![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/fob.png?raw=true)
+![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/iterations.png?raw=true)
+![alt text](https://github.com/thaleshsp2/GradientDescent/blob/master/min.png?raw=true)
 
 
 
