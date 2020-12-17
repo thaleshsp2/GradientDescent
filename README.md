@@ -1,5 +1,7 @@
 Exercício Extra 1 (implementação) - Obrigatório para a célula de otimização
 
+Implementação no Google Colab: https://colab.research.google.com/drive/1s968FRea738PlnHrwgukpwjE9G3X--vi#scrollTo=S67lXuvl78tQ
+
 Implementar o Algoritmo do Gradiente (referência: http://www.mat.ufmg.br/~taka/Download/OTEV-Vol2.pdf, página 63) na otimização do seguinte problema:
 
 minx¯f(x1,x2)=(x1−1)2+2x22−10≤x1,x2≤10
